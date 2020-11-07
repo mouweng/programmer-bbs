@@ -29,4 +29,22 @@ public class UserInfoMapperTest {
         User user = userMapper.getOne("kunkun");
         userInfoMapper.save(new UserInfo().setUid(user.getUid()));
     }
+
+    @Test
+    @Rollback
+    public void test2() throws Exception {
+        User user = userMapper.getOne("wengyifan");
+        UserInfo userInfo = userInfoMapper.getById(user.getUid());
+        System.out.println(userInfo);
+    }
+
+    @Test
+    @Rollback
+    public void test3() throws Exception {
+        User user = userMapper.getOne("wengyifan");
+        UserInfo userInfo = userInfoMapper.getById(user.getUid());
+        userInfo.setQq("111");
+        userInfoMapper.updateById(userInfo);
+    }
+
 }

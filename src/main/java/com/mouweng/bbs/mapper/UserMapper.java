@@ -1,9 +1,11 @@
 package com.mouweng.bbs.mapper;
 import com.mouweng.bbs.pojo.User;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Repository;
 
 
 @Mapper
+@Repository
 public interface UserMapper {
 
     @Select("select * from ks_user where username = #{username}")

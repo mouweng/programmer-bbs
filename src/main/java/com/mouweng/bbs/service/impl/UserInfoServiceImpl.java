@@ -16,4 +16,14 @@ public class UserInfoServiceImpl implements UserInfoService {
     public void save(UserInfo userInfo) {
         userInfoMapper.save(userInfo);
     }
+
+    @Override
+    public UserInfo getById(String uid) {
+        return userInfoMapper.getById(uid);
+    }
+
+    @Override
+    public void updateById(UserInfo userInfo) {
+        userInfoMapper.updateById(userInfo);
+    }
 }
