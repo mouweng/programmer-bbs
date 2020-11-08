@@ -1,5 +1,7 @@
 package com.mouweng.bbs.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.mouweng.bbs.mapper.DownloadMapper;
 import com.mouweng.bbs.pojo.Download;
 import com.mouweng.bbs.service.DownloadService;
@@ -17,5 +19,13 @@ public class DownloadServiceImpl implements DownloadService {
     @Override
     public List<Download> selectAll() {
         return downloadMapper.selectAll();
+    }
+
+    @Override
+    public PageInfo findAll(int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Download> DownloadList = downloadMapper.selectAll();
+        PageInfo<Download> pageInfo = new PageInfo<>(DownloadList);
+        return pageInfo;
     }
 }

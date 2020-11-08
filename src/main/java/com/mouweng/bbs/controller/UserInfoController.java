@@ -1,6 +1,9 @@
 package com.mouweng.bbs.controller;
 
 import com.mouweng.bbs.pojo.UserInfo;
+import com.mouweng.bbs.service.BlogService;
+import com.mouweng.bbs.service.CommentService;
+import com.mouweng.bbs.service.QuestionService;
 import com.mouweng.bbs.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +17,12 @@ public class UserInfoController {
 
     @Autowired
     UserInfoService userInfoService;
+    @Autowired
+    BlogService blogService;
+    @Autowired
+    QuestionService questionService;
+    @Autowired
+    CommentService commentService;
 
     @GetMapping("userinfo/setting/{uid}")
     public String userSetting(@PathVariable String uid, Model model) {
@@ -23,6 +32,15 @@ public class UserInfoController {
             String[] hobbys = userInfo.getHobby().split(",");
             model.addAttribute("infoHobbys",hobbys);
         }
+
+        // 获取用户的问题，博客，回复数
+        int blogCount = blogService.count(uid);
+        int questionCount = questionService.count(uid);
+        int commentCount = commentService.count(uid);
+        model.addAttribute("blogCount",blogCount);
+        model.addAttribute("questionCount",questionCount);
+        model.addAttribute("commentCount",commentCount);
+
         return "user/settings";
     }
 
@@ -33,4 +51,6 @@ public class UserInfoController {
         userInfoService.updateById(userInfo);
         return "redirect:/user/"+uid;
     }
+
+
 }

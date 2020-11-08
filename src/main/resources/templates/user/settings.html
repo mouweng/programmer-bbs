@@ -19,6 +19,59 @@
 
     <div class="row">
 
+        <aside class="col-md-3 blog-sidebar" th:fragment="userShowPanel">
+
+            <div class="p-4 my-3 bg-white rounded">
+                <div class="mb-0">
+                    <p class="text-center">
+                        <img th:src="${session.loginUser.getAvatar()}" style="border-radius: 50%" width="128" height="128">
+                    </p>
+                    <div class="text-center">
+                        <span th:text="${session.loginUser.getUsername()}"></span>
+                        <br>
+                        <small>
+                            <!--<span class="badge badge-primary">普通用户</span>-->
+                            <span
+                                    th:class="${session.loginUser.getRoleId()==2?'badge badge-warning':'badge badge-success'}"
+                                    th:text="${session.loginUser.getRoleId()==2?'Vip会员':'管理员'}">
+                            </span>
+                        </small>
+                        <p class="text-center">
+                            <small th:text="${userInfo.getIntro()}"></small>
+                        </p>
+                        <p>
+                            <span th:each="hobby:${infoHobbys}"
+                                  th:text="${hobby}"
+                                  class="badge badge-light mr-1"></span>
+                        </p>
+                        <p>
+                            <button type="button" onclick="" class="btn btn-outline-primary btn-sm btn-block">关注</button>
+                        </p>
+                        <p>
+                        <table class="table">
+                            <thead id="table-title">
+                            <tr>
+                                <th scope="col">博客</th>
+                                <th scope="col">问题</th>
+                                <th scope="col">回复</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td th:text="${blogCount}">0</td>
+                                <td th:text="${questionCount}">0</td>
+                                <td th:text="${commentCount}">0</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </aside>
+
+
         <div class="col-md-9 blog-main">
 
             <div class="my-3 p-3 bg-white rounded shadow-sm">
